@@ -20,9 +20,9 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) {
-        String pass = user.getPassword_hash();
+        String pass = user.getPassword();
         String newPass = passwordEncoder.encode(pass);
-        user.setPassword_hash(newPass);
+        user.setPassword(newPass);
         return repoUser.save(user);
     }
     public Optional<User> findUserByEmail(String email) {
@@ -51,7 +51,7 @@ public class UserService {
         User existingUser = existingUserOpt.get();
 
 
-        existingUser.setPassword_hash(userWithUpdates.getPassword_hash());
+        existingUser.setPassword(userWithUpdates.getPassword());
         existingUser.setEmail(userWithUpdates.getEmail());
         existingUser.setUsername(userWithUpdates.getUsername());
         existingUser.setBio(userWithUpdates.getBio());
